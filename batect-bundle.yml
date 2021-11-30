@@ -4,7 +4,7 @@ containers:
     volumes:
       - local: <{batect.project_directory}
         container: /app
-        options: ro
+        options: cached
     working_directory: /app
 
   yamllint:
@@ -29,4 +29,4 @@ tasks:
     group: Formatting check tasks
     run:
       container: dotnet-build-env
-      command: dotnet format
+      command: dotnet format --no-restore 
