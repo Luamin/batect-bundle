@@ -11,7 +11,7 @@ containers:
     working_directory: /code
 
 tasks:
-  lint:yaml:
+  lintyaml:
     description: Check formatting of all YAML files.
     group: Formatting check tasks
     run:
@@ -19,7 +19,7 @@ tasks:
       command: yamllint --strict .
 
 
-  lint:csharp:
+  lintcsharp:
     description: Run dotnet linting tasks.
     group: Formatting check tasks
     run:
