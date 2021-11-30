@@ -1,6 +1,11 @@
 containers:
   dotnet-build-env:
     build_directory: ./Dockerfiles/dotnetbuild
+    volumes:
+      - local: <{batect.project_directory}
+        container: /app
+        options: ro
+    working_directory: /app
 
   yamllint:
     build_directory: ./Dockerfiles/yamllint
