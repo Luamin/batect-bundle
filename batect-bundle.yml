@@ -9,3 +9,19 @@ containers:
         container: /code
         options: ro
     working_directory: /code
+
+tasks:
+  lint:yaml:
+    description: Check formatting of all YAML files.
+    group: Formatting check tasks
+    run:
+      container: yamllint
+      command: yamllint --strict .
+
+
+  lint:csharp:
+    description: Run dotnet linting tasks.
+    group: Formatting check tasks
+    run:
+      container: dotnet-build-env
+      command: dotnet format
