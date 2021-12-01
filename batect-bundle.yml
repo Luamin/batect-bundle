@@ -15,6 +15,19 @@ containers:
         options: ro
     working_directory: /code
 
+  secret-check-env:
+    build_directory: ./Dockerfiles/secretcheck
+    volumes:
+      - local: <{batect.project_directory}
+        container: /code
+        options: cached
+    working_directory: /code
+    environment:
+      SINCE_COMMIT: ${SINCE_COMMIT:-}
+    run_as_current_user:
+      enabled: true
+      home_directory: /home/container-user
+
 tasks:
   lintyaml:
     description: Check formatting of all YAML files.
@@ -29,4 +42,12 @@ tasks:
     group: Formatting check tasks
     run:
       container: dotnet-build-env
-      command: dotnet format --no-restore 
+      command: dotnet format --no-restore --verbosity diag
+
+  secretcheck:
+    description: Check secrets in files.
+    group: Security check tasks
+    run:
+      container: secret-check-env
+
+  
